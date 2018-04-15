@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<project name="Calculator" basedir="." default="run">
+  <property name="src.dir" value="src"/>
+  <property name="build.dir" value="build"/>
+  <property name="name" value="Calculator"/>
+
+  <path id="master-classpath">
+   <fileset dir="${build.dir}">
+     <include name="*.class"/>
+   </fileset>
+   <pathelement path="${build.dir}"/>
+  </path>  
+
+  <target name="clean" description="Clean output directories">
+   <delete>
+     <fileset dir="${build.dir}">
+      <include name="**/*.class"/>
+     </fileset>
+   </delete>
+  </target>
+
+  <target name="compile" depends="clean" description="Compile source java files">
+   <mkdir dir="${build.dir}"/>
+   <javac destdir="${build.dir}" includeAntRuntime="false">
+     <src path="${src.dir}"/>
+   </javac>
+  </target>
+
+  <target name="run" depends="compile" description="Run java program">
+   <java classname="Calculator" fork="true">
+     <classpath refid="master-classpath"/>
+   </java>
+  </target>
+</project>
