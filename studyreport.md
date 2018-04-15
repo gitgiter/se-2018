@@ -1,10 +1,10 @@
 # SYSU SE-2018 中级实训
 ---
-### 学号：16340255 姓名：谢涛
+- 学号：16340255 姓名：谢涛
 ---
-**本篇自学报告说明**：*出于想记录学习历程和记录一些关键的Linux命令，除了回答要求的Vi,Java,Ant,Junit的自学部分，我会将本次阶段一所遇到的较有价值的问题和对应解决方案记录下来，以及其他题目的完成过程。ta可直接只查看标有检查部分的内容*  
+- **本篇自学报告说明**：*出于想记录学习历程和记录一些关键的Linux命令，除了回答要求的Vi,Java,Ant,Junit的自学部分，我会将本次阶段一所遇到的较有价值的问题和对应解决方案记录下来，以及其他题目的完成过程。ta可直接只查看标有检查部分的内容*  
 ---
-如果markdown渲染效果不佳，欢迎访问本人github博客---[传送门](https://gitgiter.github.io)
+- 如果markdown渲染效果不佳，欢迎访问本人github博客---[传送门](https://gitgiter.github.io)
 ---
 
 ## 学习Vi/Vim编辑器的使用（检查部分）
@@ -188,8 +188,66 @@ Vim是Vi的升级版，Vim基本上兼容所有的Vi指令，然后也扩展了�
         // printf can specify the output format like in C
         System.out.printf("%2s %d", ' ', 3);
         ```
-    - GUI界面
+    - GUI界面  
+        -  大致结构
+        Java的GUI界面讲究框架、容器跟组件。通常都是先建立一个框架，把在这个框架上再放几个容器，然后往容器里面塞各种组件，这是目前我对Java GUI的理解。也就是说我要创建一个图形界面类，首先这个类就得继承一个最基本的框架JFrame，在JFrame上添加一些Pannel设定布局，再然后在实例化一些GUI组件添加到容器中。其中Frame是带标题和边框的最顶层窗体；Panel是个最简单的容器类，它提供空间让程序放其它组件，包括其它Panel。添加到容器中的组件放在一个列表中。列表的顺序将定义组件在容器内的正向堆栈顺序。如果将组件添加到容器中时未指定索引，则该索引将被添加到列表尾部（此后它位于堆栈顺序的底部）。
+        - 常用事件接口  
+        GUI图像界面的交互，最重要的莫过于就是对事件的处理了。
+            -  点击事件接口
+            继承ActionListener监听接口，并实现其核心函数actionPerformed。其中函数参数ActionEvent可以获得事件发出者的有关信息，比如最重要的事件来源，可以通过getSource()方法获得，进而做一些逻辑判断，以下是计算器小程序中实现actionPerformed的代码
+            ``` java
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+                if (e.getSource() == buttons[0][0]) {
+                    funcOperator("+");	
+                }
+                else if (e.getSource() == buttons[0][1]) {
+                    funcOperator("-");	
+                }
+                else if (e.getSource() == buttons[0][2]) {
+                    funcOperator("*");		
+                }
+                else if (e.getSource() == buttons[0][3]) {
+                    funcOperator("/");		
+                }
+                else if (e.getSource() == buttons[0][4]) {
+                    funcOk();
+                }
+                else if (e.getSource() == help) {
+                    funcHelp();
+                }
+            }
+            ```
+            -  键盘事件接口
+            继承KeyListener监听接口，KeyListener监听接口有四个必须需要实现的函数，这里仅展示实现keyPressed的实现，其他函数若不实现必须定义一个空实现。其中函数参数KeyEvent可以获得事件发出者的有关信息，事件来源可以通过getKeyCode()这类方法获得，进而做一些逻辑判断，以下是计算器小程序中实现keyPressed的代码
+            ``` java
+            @Override
+            public void keyPressed(KeyEvent e) {
+                // TODO Auto-generated method stub
+                if(e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_ADD) {
+                    funcOperator("+");
+                }
+                else if(e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_MINUS) {
+                    funcOperator("-");		
+                }
+                else if(e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_MULTIPLY) {
+                    funcOperator("*");		
+                }
+                else if(e.getKeyCode() == KeyEvent.VK_F || e.getKeyCode() == KeyEvent.VK_DIVIDE) {
+                    funcOperator("/");		
+                }
+                else if(e.getKeyCode() == KeyEvent.VK_G || e.getKeyCode() == KeyEvent.VK_EQUALS) {
+                    funcOk();
+                }
+            }
+            ```
 - 小程序
+    - 基本功能如要求，不再赘述
+    - 拓展
+        - 菜单栏
+        - 快捷键
+        - 支持键盘输入
 ## 学习Junit，利用Ant、Junit测试通过HelloWorld（检查部分）
 - 自学junit  
 JUnit 是一个 Java 编程语言的单元测试框架，被开发者用于实施对应用程序的单元测试，加快程序编制速度，同时提高编码的质量，增加了程序员的产量和程序的稳定性，可以减少程序员的压力和花费在排错上的时间。  
