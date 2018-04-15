@@ -5,17 +5,18 @@ import java.io.*;
 import java.util.*;
 
 public class Calculator extends JFrame implements KeyListener, ActionListener {
-	private JTextField num1; // the first num
-	private JTextField num2; // the second num
-	private JTextField operator; // the operator
-	private JTextField result; // the result
-	private JButton[][] buttons; // all the buttons
-	private JMenuItem help; // help menu
+	private JTextField num1; 
+	private JTextField num2; 
+	private JTextField operator; 
+	private JTextField result; 
+	private JButton[][] buttons; 
+	private JMenuItem help; 
 	
 	public Calculator()
 	{
+		// set 3*1 big grid
 		Container container=getContentPane();
-		container.setLayout(new GridLayout(3, 1)); // set 3*1 big grid
+		container.setLayout(new GridLayout(3, 1));
 		
 		//set menu
 		JMenuBar menuBar = new JMenuBar(); 
