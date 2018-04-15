@@ -1,10 +1,16 @@
 # SYSU SE-2018 中级实训
 ---
+
 - 学号：16340255 姓名：谢涛
+
 ---
+
 - **本篇自学报告说明**：*出于想记录学习历程和记录一些关键的Linux命令，除了回答要求的Vi,Java,Ant,Junit的自学部分，我会将本次阶段一所遇到的较有价值的问题和对应解决方案记录下来，以及其他题目的完成过程。ta可直接只查看标有检查部分的内容*  
+
 ---
-- 如果markdown渲染效果不佳，欢迎访问本人github博客---[传送门](https://gitgiter.github.io)
+
+- 如果markdown渲染效果不佳，欢迎访问本人github博客---[传送门](https://gitgiter.github.io/2018/04/15/SYSU-SE-2018-Part1/)
+
 ---
 
 ## 学习Vi/Vim编辑器的使用（检查部分）
@@ -127,6 +133,7 @@ Vim是Vi的升级版，Vim基本上兼容所有的Vi指令，然后也扩展了�
         |decription|关于 target 功能的简单描述（可选）|  
         |if|用于验证指定的属性是否存在，若不存在，所在 target 将不会被执行（可选）|
         |unless|该属性的功能与 if 属性的功能正好相反，它也用于验证指定的属性是否存在，若不存在，所在 target 将会被执行（可选）|
+
     - 其他元素
         - fileset，用于定制文件集，可以用通配符过滤或选取某些模式的文件
         - property，属性设置，一般在这声明路径变量(使程序更简洁)
@@ -448,7 +455,10 @@ java -classpath .:gridworld.jar:projects/firsrProject BugRunner
 - gridworld.jar引用  
 jar包就是别人已经写好的一些类，然后将这些类进行打包，你可以将这些jar包引入你的项目中，然后就可以直接使用这些jar包中的类和属性了。所以引用gridworld.jar，简单来讲就是像c/c++里的include，java里面的import也是一个道理，在BugRunner里面import了一下gridworld.jar里面的库，就必须把gridworld.jar引用进来，否则就像c/c++里面用了某些头文件里面的函数却没有包含那个头文件，就会报函数未定义或者引用错误之类的信息。
 ## My Short Answer on Matrix
-- Step1 Running the Demo
+
+---
+
+### Step1 Running the Demo
 1. Does the bug always move to a new location? Explain.  
 Not always. The bug will only move to a new location when the location in front of it is empty and exists, whether there is a flower in the cell or not.   
 2. In which direction does the bug move?  
@@ -469,7 +479,10 @@ The flower has fading behavior. It starts fading when it's produced, and its col
 No. The rock can not move, and it doesn't seems like having any other behavior.
 10. Can more than one actor (bug, flower, rock) be in the same location in the grid at the same time?  
 No. The grid cell can only contain an actor at a time.
-- Step2 Exploring Actor State and Behavior
+
+---
+
+### Step2 Exploring Actor State and Behavior
 1. Test the setDirection method with the following inputs and complete the table, giving the compass direction each input represents.  
 
     |Degrees|Compass Direction|
@@ -483,10 +496,11 @@ No. The grid cell can only contain an actor at a time.
     |270|West|
     |315|North West|
     |360|North|
+
 2. Move a bug to a different location using the moveTo method. In which directions can you move it? How far can you move it? What happens if you try to move the bug outside the grid?
-- The bug can move to any valid cell in the gridworld, but without changing the direction;
-- The diagonal line is the farthest;
-- The program will throw an IllegalArgumentException exception.
+    - The bug can move to any valid cell in the gridworld, but without changing the direction;
+    - The diagonal line is the farthest;
+    - The program will throw an IllegalArgumentException exception.
 3. Change the color of a bug, a flower, and a rock. Which method did you use?  
 The setColor method.
 4. Move a rock on top of a bug and then move the rock again. What happened to the bug?  
