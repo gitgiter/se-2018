@@ -5,19 +5,20 @@ import java.io.*;
 import java.util.*;
 
 public class Calculator extends JFrame implements KeyListener, ActionListener {
-	private JTextField num1;
-	private JTextField num2;
-	private JTextField operator;
-	private JTextField result;
-	private JButton[][] buttons;
-	private JMenuItem help;
+	private JTextField num1; // the first num
+	private JTextField num2; // the second num
+	private JTextField operator; // the operator
+	private JTextField result; // the result
+	private JButton[][] buttons; // all the buttons
+	private JMenuItem help; // help menu
 	
 	public Calculator()
 	{
 		Container container=getContentPane();
-		container.setLayout(new GridLayout(3, 1));
+		container.setLayout(new GridLayout(3, 1)); // set 3*1 big grid
 		
-		JMenuBar menuBar = new JMenuBar();
+		//set menu
+		JMenuBar menuBar = new JMenuBar(); 
 		JMenu menu = new JMenu("Menu");
 		menu.setMnemonic('M');
 		help = new JMenuItem("Help");
@@ -27,38 +28,47 @@ public class Calculator extends JFrame implements KeyListener, ActionListener {
 		menu.add(help);
 		container.add(menuBar);
 		
+		// set first line
 		JPanel firstLine = new JPanel();
 		firstLine.setLayout(new GridLayout(1, 5, 5, 5));
 		container.add(firstLine);
+
+		// set second line
 		JPanel secondLine = new JPanel();
 		secondLine.setLayout(new GridLayout(1, 5, 5, 5));
 		container.add(secondLine);
 		
+		// set num1
 		num1 = new JTextField("12");
 		num1.setEditable(true);
 		num1.setHorizontalAlignment(JTextField.CENTER);
 		firstLine.add(num1);			
 		
+		// set operator
 		operator = new JTextField("");
 		operator.setEditable(false);
 		operator.setHorizontalAlignment(JTextField.CENTER);
 		firstLine.add(operator);
 		
+		// set num2
 		num2 = new JTextField("2");
 		num2.setEditable(true);
 		num2.setHorizontalAlignment(JTextField.CENTER);
 		firstLine.add(num2);
 		
+		// set equal
 		JTextField equal = new JTextField("=");
 		equal.setEditable(false);
 		equal.setHorizontalAlignment(JTextField.CENTER);
 		firstLine.add(equal);
 		
+		// set result
 		result = new JTextField("");
 		result.setEditable(false);
 		result.setHorizontalAlignment(JTextField.CENTER);
 		firstLine.add(result);
 				
+		// set buttons
 		buttons = new JButton[1][5];
 		buttons[0][0] = new JButton("+");
 		buttons[0][1] = new JButton("-");
@@ -87,11 +97,13 @@ public class Calculator extends JFrame implements KeyListener, ActionListener {
 		mycal.pack();
 	}
 	
+	// set text of the operator
 	public void funcOperator(String op)
 	{
 		operator.setText(op);
 	}
 	
+	// compute and set text
 	private void funcOk()
 	{	
 		String res = "";
@@ -124,6 +136,7 @@ public class Calculator extends JFrame implements KeyListener, ActionListener {
 		result.setText(res);
 	}
 	
+	// set content of the help menu
 	private void funcHelp()
 	{
 		JOptionPane.showMessageDialog(this,
@@ -133,7 +146,7 @@ public class Calculator extends JFrame implements KeyListener, ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		// respond to GUI click
 		if (e.getSource() == buttons[0][0]) {
 			funcOperator("+");	
 		}
@@ -156,7 +169,7 @@ public class Calculator extends JFrame implements KeyListener, ActionListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
+		// respond to keyboard press
 		if(e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_EQUALS) {
 			funcOperator("+");
 		}
