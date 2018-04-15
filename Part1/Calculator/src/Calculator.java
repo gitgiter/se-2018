@@ -18,7 +18,7 @@ public class Calculator extends JFrame implements KeyListener, ActionListener {
 		container.setLayout(new GridLayout(3, 1));
 		
 		JMenuBar menuBar = new JMenuBar();
-		JMenu menu = new JMenu("menu");
+		JMenu menu = new JMenu("Menu");
 		menu.setMnemonic('M');
 		help = new JMenuItem("Help");
 		help.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, InputEvent.CTRL_MASK));
@@ -118,7 +118,7 @@ public class Calculator extends JFrame implements KeyListener, ActionListener {
 		else {
 			res = "Invalid";
 		}
-		if (res.equals("Invalid")) {			
+		if (!res.equals("Invalid")) {			
 			res = String.valueOf(ans);
 		}			
 		result.setText(res);
@@ -128,7 +128,7 @@ public class Calculator extends JFrame implements KeyListener, ActionListener {
 	{
 		JOptionPane.showMessageDialog(this,
 				"can use both mouse or keyboard\n" + "add: a or +\n" + "minus: s or -\n" +
-		"multiply: d or *\n" + "divide: f or /\n" + "ok: g or =\n", "Tips", JOptionPane.INFORMATION_MESSAGE);
+		"multiply: d or *\n" + "divide: f or /\n" + "ok: g or =\n" + "help: Ctrl+h", "Tips", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	@Override
