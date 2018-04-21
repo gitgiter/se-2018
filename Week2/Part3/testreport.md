@@ -151,15 +151,18 @@
         world.add(new Location(0, 2), rock);
         assertEquals(false, jumper.canJump());
         jumper.turn();
-        world.add(new Location(4, 0), flower);
+        world.add(new Location(0, 4), flower);
         assertEquals(true, jumper.canJump());
         jumper.jump();
         assertEquals(false, jumper.canJump());
         jumper.turn();
         jumper.turn();
         jumper.turn();
-        world.add(new Location(4, 2), jumper2);
-        assertEquals(true, jumper.canJump());
+        world.add(new Location(2, 4), jumper2);        
+        assertEquals(false, jumper.canJump());
+        jumper.turn();
+        world.add(new Location(2, 2), bug);
+        assertEquals(false, jumper.canJump());
     }
     ```
     - Check condition
@@ -181,7 +184,12 @@
         - Another jumper
         The fourth assertEquals statement. To check whether the jumper judge correctly while jumping towards the other jumper.
         ```java
-        assertEquals(true, jumper.canJump());
+        assertEquals(false, jumper.canJump());
+        ```
+        - Bug
+        The fifth assertEquals statement. To check whether the jumper judge correctly while jumping onto a bug.
+        ```java
+        assertEquals(false, jumper.canJump());
         ```
     - Analysis
         - Rock  
@@ -191,4 +199,6 @@
         - Edge
         It cannot jump out of grid so it should be false.
         - Another jumper  
-        It can jump towards to the other jumper because the other jumper will jump away in next step.
+        It cannot jump towards to the other jumper so it should be false.
+        - Bug
+        It cannot jump onto a bug so it should be false.
