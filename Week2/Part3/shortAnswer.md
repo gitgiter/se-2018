@@ -171,7 +171,7 @@ Location[] getOccupiedLocations()
 ```
 
 
-Set 5  
+## Set 5  
 10. Name three properties of every actor.
 - location
 - direction
