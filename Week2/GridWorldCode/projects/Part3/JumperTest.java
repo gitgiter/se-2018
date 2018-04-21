@@ -6,6 +6,7 @@ import info.gridworld.actor.Actor;
 import info.gridworld.actor.ActorWorld;
 import info.gridworld.actor.Bug;
 import info.gridworld.actor.Rock;
+import info.gridworld.actor.Flower;
 import info.gridworld.grid.Location;
 
 import java.awt.*;
@@ -16,6 +17,7 @@ public class JumperTest {
     private ActorWorld world = new ActorWorld();
     private Rock rock = new Rock();
     private Flower flower = new Flower();
+    private Bug bug = new Bug();
 
     @Before
     public void setUp() throws Exception {
@@ -84,14 +86,17 @@ public class JumperTest {
         world.add(new Location(0, 2), rock);
         assertEquals(false, jumper.canJump());
         jumper.turn();
-        world.add(new Location(4, 0), flower);
+        world.add(new Location(0, 4), flower);
         assertEquals(true, jumper.canJump());
         jumper.jump();
         assertEquals(false, jumper.canJump());
         jumper.turn();
         jumper.turn();
         jumper.turn();
-        world.add(new Location(4, 2), jumper2);
-        assertEquals(true, jumper.canJump());
+        world.add(new Location(2, 4), jumper2);        
+        assertEquals(false, jumper.canJump());
+        jumper.turn();
+        world.add(new Location(2, 2), bug);
+        assertEquals(false, jumper.canJump());
     }
 }
