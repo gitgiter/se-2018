@@ -1,0 +1,46 @@
+# circle bug
+javac -cp .:gridworld.jar projects/Part2/CircleBug/CircleBug.java projects/Part2/CircleBug/CircleBugRunner.java
+java -cp .:gridworld.jar:projects/Part2/CircleBug/ CircleBugRunner
+
+# spiral bug
+javac -cp .:gridworld.jar projects/Part2/SpiralBug/SpiralBug.java projects/Part2/SpiralBug/SpiralBugRunner.java 
+java -cp .:gridworld.jar:projects/Part2/SpiralBug/ SpiralBugRunner
+
+# Z bug
+javac -cp .:gridworld.jar projects/Part2/ZBug/ZBug.java projects/Part2/ZBug/ZBugRunner.java 
+java -cp .:gridworld.jar:projects/Part2/ZBug/ ZBugRunner
+
+# dancing bug
+javac -cp .:gridworld.jar projects/Part2/DancingBug/DancingBug.java projects/Part2/DancingBug/DancingBugRunner.java 
+java -cp .:gridworld.jar:projects/Part2/DancingBug/ DancingBugRunner
+
+# jumper
+javac -cp .:gridworld.jar:junit-4.9.jar projects/Part3/Jumper.java projects/Part3/JumperRunner.java projects/Part3/JumperTest.java 
+java -cp .:gridworld.jar:junit-4.9.jar:projects/Part3/ JumperRunner
+
+# run junit test by ant
+
+# ModifiedChameleon
+javac -classpath .:gridworld.jar projects/Part4/ModifiedChameleonCritter/ModifiedChameleonCritter.java projects/Part4/ModifiedChameleonCritter/ModifiedChameleonCritterRunner.java
+java -classpath .:gridworld.jar:projects/Part4/ModifiedChameleonCritter/ ModifiedChameleonCritterRunner
+
+# ChameleonKid
+javac -classpath .:gridworld.jar projects/Part4/ChameleonKid/ChameleonKid.java projects/Part4/ChameleonKid/ChameleonKidRunner.java projects/Part4/ModifiedChameleonCritter/ModifiedChameleonCritter.java
+java -classpath .:gridworld.jar:projects/Part4/ModifiedChameleonCritter/:projects/Part4/ChameleonKid/ ChameleonKidRunner
+
+# RockHound
+javac -classpath .:gridworld.jar projects/Part4/RockHound/RockHound.java projects/Part4/RockHound/RockHoundRunner.java 
+java -classpath .:gridworld.jar:projects/Part4/RockHound/ RockHoundRunner
+
+# BlusterCritter
+javac -classpath .:gridworld.jar projects/Part4/BlusterCritter/BlusterCritter.java projects/Part4/BlusterCritter/BlusterCritterRunner.java 
+java -classpath .:gridworld.jar:projects/Part4/BlusterCritter/ BlusterCritterRunner
+
+# QuickCrab
+javac -classpath .:gridworld.jar projects/Part4/QuickCrab/QuickCrab.java projects/Part4/QuickCrab/QuickCrabRunner.java projects/critters/CrabCritter.java 
+java -classpath .:gridworld.jar:projects/critters/:projects/Part4/QuickCrab/ QuickCrabRunner
+
+# KingCrab
+javac -classpath .:gridworld.jar projects/Part4/KingCrab/KingCrab.java projects/Part4/KingCrab/KingCrabRunner.java projects/critters/CrabCritter.java 
+java -classpath .:gridworld.jar:projects/critters/:projects/Part4/KingCrab/ KingCrabRunner
+
