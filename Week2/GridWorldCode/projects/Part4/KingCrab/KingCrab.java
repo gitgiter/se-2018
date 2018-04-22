@@ -9,17 +9,18 @@ import java.util.ArrayList;
  * eats and moves. Meanwhile, it pushes the actors in the front of it. <br />
  * This class is not tested on the AP CS A and AB exams.
  */
-public class KingCrabCritter extends CrabCritter {
-  public void processActors(ArrayList<Actor> actors) {
-    Grid gr = getGrid();
-    int direction = getDirection();
-    for (Actor a : actors) {
-      Location temp = a.getLocation().getAdjacentLocation(direction + Location.AHEAD);
-      if (gr.isValid(temp)) {
-        a.moveTo(temp);
-      } else {
-        a.removeSelfFromGrid();
-      }
+public class KingCrab extends CrabCritter {
+    public void processActors(ArrayList<Actor> actors) {
+        Grid gr = getGrid();
+        int direction = getDirection();
+        for (Actor a : actors) {
+            Location temp = a.getLocation().getAdjacentLocation(direction + Location.AHEAD);
+            if (gr.isValid(temp)) {
+                a.moveTo(temp);
+            } 
+            else {
+                a.removeSelfFromGrid();
+            }
+        }
     }
-  }
 }

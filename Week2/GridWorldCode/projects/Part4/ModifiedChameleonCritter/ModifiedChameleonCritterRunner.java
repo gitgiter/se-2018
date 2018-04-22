@@ -8,8 +8,8 @@ import java.awt.*;
  * This class runs a world that contains ModifiedChameleon critters. <br />
  * This class is not tested on the AP CS A and AB exams.
  */
-public final class ModifiedChameleonRunner {
-    private ModifiedChameleonRunner() {
+public final class ModifiedChameleonCritterRunner {
+    private ModifiedChameleonCritterRunner() {
     }
 
     public static void main(String[] args) {
