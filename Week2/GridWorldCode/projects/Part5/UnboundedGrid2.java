@@ -34,9 +34,9 @@ public class UnboundedGrid2<E> extends AbstractGrid<E> {
         ArrayList<Location> theLocations = new ArrayList<Location>();
 
         // Look at all grid locations.
-        for (int r = 0; r < getNumRows(); r++)
+        for (int r = 0; r < dimension; r++)
         {
-            for (int c = 0; c < getNumCols(); c++)
+            for (int c = 0; c < dimension; c++)
             {
                 // If there's an object at this location, put it in the array.
                 Location loc = new Location(r, c);
