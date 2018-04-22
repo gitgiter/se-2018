@@ -185,15 +185,25 @@ private Color color;
 ```
 11. When an actor is constructed, what is its direction and color?
 - The direction is north, which is 0°.  
-- The color is blud.
+- The color is blue.
 ```java
 // @file: info/gridworld/actor/Actor.java
 // @line: 41~42
 color = Color.BLUE;
 direction = Location.NORTH;
 ```
-12. Why do you think that the Actor class was created as a class 
+12. Why do you think that the Actor class was created as a class instead of an interface?
 According to the meaning of the name itself, an Actor is more real and more natural than a Grid, with many properties and behaviors. An interface is not allow to have property members and behaviors which are implemented.
+- class
+```java
+// @file: info/gridworld/actor/Actor.java
+// @line: all
+```
+- interface
+```java
+// @file: info/gridworld/grid/Grid.java
+// @line: all
+```
 
 13. Can an actor put itself into a grid twice without first removing itself? Can an actor remove itself from a grid twice? Can an actor be placed into a grid, remove itself, and then put itself back? Try it out. What happens?
 - No. Must remove itself first before putting in again, because it will throw an IllegalStateException.
@@ -254,7 +264,7 @@ setDirection(getDirection() + 90);
 
 ## Set 6  
 15. Which statement(s) in the canMove method ensures that a bug does not try to move out of its grid?
-These statements ensure the bug perform a valid move.
+These statements ensure the bug to perform a valid move.
 ```java
 // @file: info/gridworld/actor/Bug.java
 // @line: 98~99
@@ -262,7 +272,7 @@ if (!gr.isValid(next))
     return false;
 ```
 16. Which statement(s) in the canMove method determines that a bug will not walk into a rock?
-This statement ensures returning false when a rock is next to the bug.
+This statements ensure the function to return false when a rock is next to the bug.
 ```java
 // @file: info/gridworld/actor/Bug.java
 // @line: 100~101
@@ -270,13 +280,13 @@ Actor neighbor = gr.get(next);
 return (neighbor == null) || (neighbor instanceof Flower);
 ```
 17. Which methods of the Grid interface are invoked by the canMove method and why?
-The isValid(Location) and get(Location). The isValidn method is used to ensure the next cell is valid. And the get method is used to get the Actor in the location, in order to provide support next statement.
+The isValid(Location) and get(Location). The isValid method is used to ensure the next cell is valid. And the get method is used to get the Actor in the location, in order to provide support next statement.
 ```java
 // @file: info/gridworld/actor/Bug.java
 // @line: 98
 if (!gr.isValid(next))
 // @file: info/gridworld/actor/Bug.java
-// @line: 98
+// @line: 100
 Actor neighbor = gr.get(next);
 ```
 18. Which method of the Location class is invoked by the canMove method and why?
@@ -315,7 +325,7 @@ else
     removeSelfFromGrid();
 ```
 21. Is the variable loc needed in the move method, or could it be avoided by calling getLocation() multiple times?
-Yes. The loc is needed to store the location before the bug moves, in order to put a flower in the old location.
+Yes. The *loc* is needed to store the location before the bug moves, in order to put a flower in the old location.
 ```java
 // @file: info/gridworld/actor/Bug.java
 // @line: 82~83
@@ -323,7 +333,7 @@ Flower flower = new Flower(getColor());
 flower.putSelfInGrid(gr, loc);
 ```
 22. Why do you think the flowers that are dropped by a bug have the same color as the bug?
-Because it initiate a new flower by setting the color of current bug. 
+Because a new flower is initiated by setting the color of current bug. 
 ```java
 // @file: info/gridworld/actor/Bug.java
 // @line: 82

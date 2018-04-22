@@ -1,6 +1,6 @@
-# design report
+# Design Report
 
-a. What will a jumper do if the location in front of it is empty, but the location two cells in front contains a flower or a rock?
+a. What will a jumper do if the location in front of it is empty, but the location two cells in front contains a flower or a rock?  
 It will jump when there is a flower in the cell(valid and empty), otherwise, it turns.
 ```java
 // @file: projects/Part3/Jumper.java
@@ -20,7 +20,7 @@ return (neighbor == null) || (neighbor instanceof Flower);
 // not ok to move onto any other actor
 ```
 
-b. What will a jumper do if the location two cells in front of the jumper is out of the grid?
+b. What will a jumper do if the location two cells in front of the jumper is out of the grid?  
 It will turn its direction until it can jump.
 ```java
 // @file: projects/Part3/Jumper.java
@@ -40,7 +40,7 @@ if (!gr.isValid(twoNext)) {
 ```
 
 c. What will a jumper do if it is facing an edge of the grid?
-It will turn its direction until it can jump, maybe turn twice or more.
+It will turn its direction until it can jump, maybe turn twice or more.  
 ```java
 // @file: projects/Part3/Jumper.java
 // @line: 31~35
@@ -59,7 +59,7 @@ if (!gr.isValid(twoNext)) {
 ```
 
 d. What will a jumper do if another actor (not a flower or a rock) is in the cell that is two cells in front of the jumper?
-It will turn its direction if the actor doesn't move away in next step, until it can jump.
+It will turn its direction if the actor doesn't move away in next step, until it can jump.  
 ```java
 // @file: projects/Part3/Jumper.java
 // @line: 31~35
@@ -78,7 +78,7 @@ return (neighbor == null) || (neighbor instanceof Flower);
 // not ok to move onto any other actor
 ```
 
-e. What will a jumper do if it encounters another jumper in its path?
+e. What will a jumper do if it encounters another jumper in its path?  
 It will turn its direction if the other jumper doesn't move away in next step, until it can jump.
 ```java
 // @file: projects/Part3/Jumper.java

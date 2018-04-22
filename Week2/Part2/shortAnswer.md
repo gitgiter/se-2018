@@ -1,6 +1,6 @@
 # Part2
 1. What is the role of the instance variable sideLength?
-It indicates the number of steps on each side of the trace.
+From the following code **step < sideLength**, we can see that, the variable *sideLength* indicates the number of steps on each side of the trace.
 ```java
 // @file: projects/boxBug/boxBug.java
 // @line: 45~49
@@ -11,7 +11,7 @@ if (steps < sideLength && canMove())
 }
 ```
 2. What is the role of the instance variable steps?
-It records the number of steps that the bug has moved on current side.
+From the following code **step < sideLength**, we can see that, the variable *steps* records the number of steps that the bug has moved on current side.
 ```java
 // @file: projects/boxBug/BoxBug.java
 // @line: 45~49
@@ -80,7 +80,7 @@ else
 }
 ```
 7. When will the value of steps be zero?
-It's when the bug has just travelled to a new side.
+It's when the bug has just travelled to a new side or every time it's constructed.
 ```java
 // @file: projects/boxBug/BoxBug.java
 // @line: 50~55
