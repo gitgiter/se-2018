@@ -5,8 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * An <code>SparseBoundedGrid2</code> is a rectangular grid with an bounded
- * number of rows and columns. <br />
+ * A <code>BoundedGrid</code> is a rectangular grid with a finite number of
+ * rows and columns. <br />
+ * The implementation of this class is testable on the AP CS AB exam.
  */
 public class SparseBoundedGrid2<E> extends AbstractGrid<E> {
     private Map<Location, E> occupantMap;
@@ -43,9 +44,9 @@ public class SparseBoundedGrid2<E> extends AbstractGrid<E> {
     }
 
     public boolean isValid(Location loc) {
-        boolean rowValid = (0 <= loc.getRow() && loc.getRow() < rows);
-        boolean colValid = (0 <= loc.getCol() && loc.getCol() < columns);
-        return rowValid && colValid;
+        // check row and col
+        return 0 <= loc.getRow() && loc.getRow() < getNumRows()
+                && 0 <= loc.getCol() && loc.getCol() < getNumCols();
     }
 
     public ArrayList<Location> getOccupiedLocations() {

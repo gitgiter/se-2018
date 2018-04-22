@@ -5,8 +5,8 @@ import info.gridworld.grid.Location;
 import java.util.ArrayList;
 
 /**
- * <code>SparseBoundedGrid1</code> contains the methods that are common to grid
- * implementations. <br />
+ * A <code>SparseBoundedGrid1</code> is a rectangular grid with a finite number of
+ * rows and columns. <br />
  * The implementation of this class is testable on the AP CS AB exam.
  */
 public class SparseBoundedGrid1<E> extends AbstractGrid<E> {
@@ -43,9 +43,70 @@ public class SparseBoundedGrid1<E> extends AbstractGrid<E> {
     }
 
     public boolean isValid(Location loc) {
-        boolean rowValid = (0 <= loc.getRow() && loc.getRow() < rows);
-        boolean colValid = (0 <= loc.getCol() && loc.getCol() < columns);
-        return rowValid && colValid;
+    	// check row and col
+        return 0 <= loc.getRow() && loc.getRow() < getNumRows()
+                && 0 <= loc.getCol() && loc.getCol() < getNumCols();
+    }
+
+    public ArrayList<Location> getOccupiedLocations() {
+        ArrayList<Location> theLocations = new ArrayList<Location>();
+
+        // Look at all grid locations.
+        for (int r = 0; r < getNumRows(); r++)
+        {
+        	// to track a certain row node
+        	SparseGridNode currentRow = occupantArray[r];
+            while (currentRow != null) {
+            	// loc is the location which is occupied
+            	Location loc = new Location(r, currentRow.getCol());
+            	// add loc to the occupied locations
+            	theLocations.add(loc);
+            	// get next element in the list
+            	currentRow = currentRow.getNext();
+            }
+        }
+
+        return theLocations;
+    }
+
+    /**
+    * @param loc
+    * @return
+    */
+    private SparseGridNode getNode(Location loc) {
+    	// to track a certain row node
+        SparseGridNode currentRow = occupantArray[loc.getRow()];
+        // look for a location that matches loc
+        while (currentRow != null) {
+	        if (currentRow.getCol() == loc.getCol()) {
+	            return currentRow;
+	        }
+
+	        // Traverse the next node in the row list
+	        currentRow = currentRow.getNext();
+        }
+        return null;
+    }
+
+    // cast the node type to E
+    private E get(SparseGridNode node) {
+        if (node != null) {
+            return (E) node.getOccupant();
+        } 
+        else {
+            return null;
+        }
+    }
+
+    public E get(Location loc) {
+    	// get the node related to the loc from the list
+        SparseGridNode node = getNode(loc);
+        if (node != null) {
+            return (E) node.getOccupant();
+        } 
+        else {
+            return null;
+        }
     }
 
     public E put(Location loc, E obj) {
@@ -56,104 +117,50 @@ public class SparseBoundedGrid1<E> extends AbstractGrid<E> {
             throw new NullPointerException("obj == null");
         }
 
-        // Add the object to the grid. we put the new occupant to the front of a
-        // row list.
+        // Add the object to the grid. 
+        // Remove the old object from the grid.
+        // Push the new occupant into the list.
         E oldOccupant = remove(loc);
-        SparseGridNode oldRowHead = occupantArray[loc.getRow()];
-        SparseGridNode newRowHead = new SparseGridNode(obj, loc.getCol(), null,
-        oldRowHead);
-        if (oldRowHead != null) {
-            oldRowHead.setPre(newRowHead);
+        SparseGridNode oldHead = occupantArray[loc.getRow()];
+        SparseGridNode newHead = new SparseGridNode(obj, loc.getCol(), null, oldHead);
+        if (oldHead != null) {
+            oldHead.setPre(newHead);
         }
-        occupantArray[loc.getRow()] = newRowHead;
+        occupantArray[loc.getRow()] = newHead;
         return oldOccupant;
     }
 
     public E remove(Location loc) {
-    if (!isValid(loc)) {
-        throw new IllegalArgumentException("Location " + loc + " is not valid");
-    }
+	    if (!isValid(loc)) {
+	        throw new IllegalArgumentException("Location " + loc + " is not valid");
+	    }
 
-    SparseGridNode locNode = getNode(loc);
-    // Remove the object from the grid. if no found return null
-    E toRemove = get(locNode);
-    if (toRemove == null) {
-        return null;
-    }
-    // maintain the linked row
+	    // Remove the object from the grid. 
+	    // if no found return null
+	    SparseGridNode removeNode = getNode(loc);
+	    if (removeNode == null) {
+	        return null;
+	    }
 
-    if (locNode != null) {
-    SparseGridNode preNode = locNode.getPre();
-    SparseGridNode nextNode = locNode.getNext();
-    if (preNode != null) {
-    preNode.setNext(nextNode);
-    } else if (occupantArray[loc.getRow()] != null) {
-        // the preNode is null indicates that the locNode is the Head of the
-        // row.
-        // the head changes!
-        occupantArray[loc.getRow()] = nextNode;
+	    // cast the type to E in order to return
+	    E ENode = get(removeNode);
+
+	    // modify the list
+	    SparseGridNode preNode = removeNode.getPre();
+	    SparseGridNode nextNode = removeNode.getNext();
+	    if (preNode != null) {
+	    	// link the preNode to the nextNode
+	    	preNode.setNext(nextNode);
+	    } 
+	    else if (occupantArray[loc.getRow()] != null) {
+	        // reset the head to nextNode because the removeNode is the head
+	        occupantArray[loc.getRow()] = nextNode;
         }
+        // link the nextNode to the preNode
         if (nextNode != null) {
             nextNode.setPre(preNode);
         }
-    }
 
-    return toRemove;
-    }
-
-    public E get(Location loc) {
-        SparseGridNode node = getNode(loc);
-        if (node != null) {
-            return (E) node.getOccupant();
-        } 
-        else {
-            return null;
-        }
-    }
-
-    public ArrayList<Location> getOccupiedLocations() {
-        ArrayList<Location> occupied = new ArrayList<Location>();
-
-        // traverses all occupied locations.
-        for (int row = 0; row < rows; row++) {
-            SparseGridNode rowListNode = occupantArray[row];
-            while (rowListNode != null) {
-                // a location appearing in the list indicates that it is valid
-                // and no necessity to check. it will be added to the return list.
-                Location loc = new Location(row, rowListNode.getCol());
-                occupied.add(loc);
-
-                // Traverse the next location in the row.
-                rowListNode = rowListNode.getNext();
-            }
-        }
-        return occupied;
-    }
-
-    /**
-    * @param loc
-    * @return
-    */
-    private SparseGridNode getNode(Location loc) {
-        SparseGridNode rowListNode = occupantArray[loc.getRow()];
-        while (rowListNode != null) {
-        if (rowListNode.getCol() == loc.getCol()) {
-            // force cast to the E type object.
-            return rowListNode;
-        }
-
-        // Traverse the next node in the row list
-        rowListNode = rowListNode.getNext();
-        }
-        return null;
-    }
-
-    private E get(SparseGridNode node) {
-        if (node != null) {
-            return (E) node.getOccupant();
-        } 
-        else {
-            return null;
-        }
-    }
+    	return ENode;
+    }            
 }

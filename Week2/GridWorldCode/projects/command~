@@ -44,6 +44,3 @@ java -classpath .:gridworld.jar:projects/critters/:projects/Part4/QuickCrab/ Qui
 javac -classpath .:gridworld.jar projects/Part4/KingCrab/KingCrab.java projects/Part4/KingCrab/KingCrabRunner.java projects/critters/CrabCritter.java 
 java -classpath .:gridworld.jar:projects/critters/:projects/Part4/KingCrab/ KingCrabRunner
 
-# Part5
-javac -classpath .:gridworld.jar projects/Part5/SparseBoundedGrid1.java projects/Part5/SparseBoundedGrid2.java projects/Part5/SparseGridNode.java projects/Part5/UnboundedGrid2.java projects/Part5/SparseGridRunner.java
-java -classpath .:gridworld.jar:projects/Part5/ SparseGridRunner

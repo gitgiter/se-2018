@@ -31,18 +31,22 @@ public class UnboundedGrid2<E> extends AbstractGrid<E> {
     }
 
     public ArrayList<Location> getOccupiedLocations() {
-        ArrayList<Location> occupied = new ArrayList<Location>();
+        ArrayList<Location> theLocations = new ArrayList<Location>();
 
         // Look at all grid locations.
-        for (int r = 0; r < dimension; r++) {
-            for (int c = 0; c < dimension; c++) {
+        for (int r = 0; r < getNumRows(); r++)
+        {
+            for (int c = 0; c < getNumCols(); c++)
+            {
                 // If there's an object at this location, put it in the array.
                 Location loc = new Location(r, c);
-                if (get(loc) != null)
-                occupied.add(loc);
+                if (get(loc) != null) {
+                    theLocations.add(loc);
+                }
             }
         }
-        return occupied;
+
+        return theLocations;
     }
 
     public E get(Location loc) {
@@ -79,11 +83,11 @@ public class UnboundedGrid2<E> extends AbstractGrid<E> {
             throw new IllegalArgumentException("Location " + loc + " is not valid");
         }
 
-        // if location is valid and not in array, return null
+        // return null if a location is valid, but not in the array
         if (loc.getRow() >= dimension || loc.getCol() >= dimension) {
             return null;
         }
-        // Remove the object from the grid.
+        // Remove the object from the array grid.
         E r = get(loc);
         occupantArray[loc.getRow()][loc.getCol()] = null;
         return r;
@@ -96,17 +100,17 @@ public class UnboundedGrid2<E> extends AbstractGrid<E> {
             size *= 2;
         }
 
-        // create a new array
+        // create a new resized array
         Object[][] temp = new Object[size][size];
 
-        // copy over the old contents
+        // move the old array to the new array
         for (int r = 0; r < dimension; r++) {
             for (int c = 0; c < dimension; c++) {
                 temp[r][c] = occupantArray[r][c];
             }
         }
             
-        // assign occupantArray the new array and update dimension
+        // reset the properties
         occupantArray = temp;
         dimension = size;
     }
