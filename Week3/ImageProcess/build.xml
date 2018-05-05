@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<project name="ImageProcess" default="run">
+  <property name="run.classpath" value="code"/>
+  <property name="run.srcpath" value="code"/>
+  <property name="test.srcpath" value="code"/>
+  <property name="lib.dir" value="ImageReader"/>
+
+  <path id="compile.path">   
+    <pathelement location="${lib.dir}/ImageReader.jar"/> 
+    <pathelement location="${lib.dir}/junit-4.9.jar"/> 
+    <pathelement location="${lib.dir}/lib/appframework-1.0.3.jar"/>
+    <pathelement location="${lib.dir}/lib/swing-worker-1.1.jar"/>
+  </path>
+
+  <target name="compile">
+    <javac destdir="${run.classpath}" srcdir="${run.srcpath}" classpathref="compile.path"/>
+  </target>
+
+  <target name="junit" depends="compile">
+    <junit printsummary="true">
+      <formatter type="plain" usefile="true"/>
+      <classpath path="${run.classpath}">
+        <path refid="compile.path"/>
+      </classpath>
+      <test name="MyImageIOTest"/>
+    </junit>
+  </target>
+
+  <target name="run" depends="compile">
+    <java fork="true" classname="MyRunner" classpath="${run.classpath}" classpathref="compile.path"/>
+  </target>
+
+  <target name="doc">
+    <javadoc destdir="" encoding="UTF-8" docencoding="UTF-8">
+      <packageset dir="${run.srcpath}">
+        <include name="**"/>
+      </packageset>
+    </javadoc>
+  </target>
+
+</project>
