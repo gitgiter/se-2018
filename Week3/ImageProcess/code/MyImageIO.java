@@ -15,7 +15,7 @@ import javax.imageio.ImageIO;
 import imagereader.IImageIO;  
   
 public class MyImageIO implements IImageIO{  
-    Image _img;  
+    private Image _img;  
       
     public int readNumFromBytes(byte[] bytes, int start, int end){
         int byteNum = end - start + 1;
@@ -134,28 +134,14 @@ public class MyImageIO implements IImageIO{
     }
 
     //convert image to bufferimage and write to file  
-    public Image myWrite(Image img, String path) throws IOException{        
-        BufferedImage bufferedImage = toBufferedImage(img);
-        ImageIO.write((RenderedImage)bufferedImage, "bmp", new File(path));
+    public Image myWrite(Image img, String path) throws IOException{         
+        try {
+            BufferedImage bufferedImage = toBufferedImage(img);
+            ImageIO.write((RenderedImage)bufferedImage, "bmp", new File(path));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return img;
-        // try {
-        //     int height = img.getHeight(null);
-        //     int width = img.getWidth(null);
-        //     int fileType;
-
-        //     fileType = BufferedImage.TYPE_3BYTE_BGR;
-
-        //     // create buffered image
-        //     BufferedImage bi = new BufferedImage(width, height, fileType);
-        //     bi.getGraphics().drawImage(img, 0, 0, null);
-        //     // create the file
-        //     File iFile= new File(path + ".bmp");
-        //     ImageIO.write(bi, "bmp", iFile);
-        // } catch (Exception e) {
-        //     e.printStackTrace();
-        // }
-
-        // return img;
-    
     }
 }

@@ -18,19 +18,19 @@ import javax.swing.JOptionPane;
  * The implementation of this class is testable on the AP CS A and AB exams.
  */
 public class MazeBug extends Bug {
-	public Location next;
-	public Location last;
-	public boolean isEnd = false;
-	public Stack<ArrayList<Location>> crossLocation = new Stack<ArrayList<Location>>();
-	public Integer stepCount = 0;
+	private Location next;
+	private Location last;
+	private boolean isEnd = false;
+	private Stack<ArrayList<Location>> crossLocation = new Stack<ArrayList<Location>>();
+	private Integer stepCount = 0;
 	//final message has been shown
 	boolean hasShown = false;
 	//store the visited location
-	public boolean visited[][];
+	private boolean visited[][];
 	//the road to try
-	public ArrayList<Location> branch;
+	private ArrayList<Location> branch;
 	//to choose a direction
-	public int[] estimate = new int[4];
+	private int[] estimate = {1, 1, 1, 1};
 
 	/**
 	 * Constructs a maze bug that traces a path
@@ -44,9 +44,11 @@ public class MazeBug extends Bug {
 
 		int size = 100;
 		visited = new boolean[size][size];
-        for (int i = 0; i < size; i++)
-            for (int j = 0; j < size; j++)
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
                 visited[i][j] = false;
+            }
+        }
 
 		Location loc = getLocation();
         branch = new ArrayList<Location>();
@@ -75,7 +77,6 @@ public class MazeBug extends Bug {
 			visited[next.getRow()][next.getCol()] = true;
 		} 
 		else {
-
 			//go back when cannot move
 			goBack();
 			//increase step count when go back
@@ -193,7 +194,7 @@ public class MazeBug extends Bug {
             		break;
             	}
             }
-            //int random = (int)(Math.random() * (validLocsNum - 1));
+
             next = validLocs.get(random);
             last = getLocation();
 

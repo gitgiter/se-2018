@@ -1,0 +1,11 @@
+Testsuite: MyImageIOTest
+Tests run: 8, Failures: 0, Errors: 0, Time elapsed: 0.989 sec
+
+Testcase: testmyBlue2 took 0.449 sec
+Testcase: testGreen1 took 0.055 sec
+Testcase: testGreen2 took 0.168 sec
+Testcase: testRed1 took 0.04 sec
+Testcase: testRed2 took 0.165 sec
+Testcase: testGray1 took 0.034 sec
+Testcase: testGray2 took 0.031 sec
+Testcase: testmyBlue1 took 0.032 sec

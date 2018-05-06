@@ -8,7 +8,7 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.PriorityQueue;
 import java.util.HashSet;
-import java.util.List;
+import java.util.LinkedList;
 import java.util.ArrayList;
 
 /**
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class Solution extends Jigsaw {
 
     private Queue<JigsawNode> openList;  // 用以保存已发现但未访问的节点
-    private Set<JigsawNode> closeList;    // 用以保存已发现的节点
+    private Set<JigsawNode> closeSet;    // 用以保存已发现的节点
 
     /**
      * 拼图构造函数
@@ -43,33 +43,19 @@ public class Solution extends Jigsaw {
      */
     public boolean BFSearch(JigsawNode bNode, JigsawNode eNode) {
         // reset all the variables
-        // this.openList = new Queue<JigsawNode>();
-        // this.closeList = new Set<JigsawNode>();
         this.beginJNode = new JigsawNode(bNode);
         this.endJNode = new JigsawNode(eNode);
         this.currentJNode = null;
 
-        this.closeList = new HashSet<>(1000);
-        this.openList = new PriorityQueue<>(500, new Comparator<JigsawNode>() {
-            @Override
-            public int compare(JigsawNode a, JigsawNode b) {
-                if (a.getEstimatedValue() < b.getEstimatedValue()) {
-                    return -1;
-                } else if (a.getEstimatedValue() > b.getEstimatedValue()) {
-                    return 1;
-                } else if (a.getNodeDepth() < b.getNodeDepth()) {
-                    return -1;
-                } else if (a.getNodeDepth() > b.getNodeDepth()) {
-                    return 1;
-                }
-                return 0;
-            }
-        });
+        this.closeSet = new HashSet<>(1000);
+        this.openList = new LinkedList<JigsawNode>();
+        // has the same elements with openList
+        // but used for querying specially
+        // to increase query speed
+        Set<JigsawNode> openSet = new HashSet<>(1000);
         
         // reset solution flags
-        //this.searchedNodesNum = 0;
-        //this.solutionPath = null;
-        //super.searchedNodesNum = 0;
+        int mySearchedNodesNum = 0;
         super.reset();
 
         // regards as searching fail,
@@ -79,6 +65,7 @@ public class Solution extends Jigsaw {
         
         // (1)Add begin node to openList.
         openList.add(this.beginJNode);
+        openSet.add(this.beginJNode);
 
         // (2)If openList is empty, fail to start searching
         // else start searching
@@ -92,9 +79,11 @@ public class Solution extends Jigsaw {
             }
             
             // (2-2)Remove the first node from openList
-            // and add the node into the closeList
+            // and add the node into the closeSet
             this.openList.remove();
-            this.closeList.add(this.currentJNode);
+            openSet.remove(currentJNode);
+            this.closeSet.add(this.currentJNode);
+            mySearchedNodesNum++;
             //this.searchedNodeNum++;
             //super.increaseSearchedNodesNum();
             
@@ -106,13 +95,14 @@ public class Solution extends Jigsaw {
             };
             for (int i = 0; i < DIRS; ++i) {
                 // if the adjancent nodes can move to directions i
-                // and the node is not in openList
+                // and the node is not in openSet(openSet! not openList! faster!)
                 // and the node has not been visited
                 if (adjancentNodes[i].move(i) &&
-                !this.openList.contains(adjancentNodes[i]) &&
-                !this.closeList.contains(adjancentNodes[i])) {
+                !openSet.contains(adjancentNodes[i]) &&
+                !this.closeSet.contains(adjancentNodes[i])) {
                     // then add this node into openList
                     openList.add(adjancentNodes[i]);
+                    openSet.add(adjancentNodes[i]);
                 }
             }
         }
@@ -145,10 +135,10 @@ public class Solution extends Jigsaw {
             }
         }
 
-        int ManHattan = 0; //ManHattan distance
-        int Euclid = 0; //Euclidean distance
+        int manHattan = 0; //ManHattan distance
+        int euclid = 0; //Euclidean distance
 
-        // Compute Manhattan distance and 
+        // Compute manHattan distance and 
         // the square of eculidean distance of all nodes
         for (int i = 1; i <= dimension * dimension; ++i) {
             // the node cannot be empty
@@ -159,8 +149,8 @@ public class Solution extends Jigsaw {
                         int startY = (i - 1) % dimension;
                         int endX = (j - 1) / dimension;
                         int endY = (j - 1) % dimension;
-                        ManHattan += Math.abs(startX - endX) + Math.abs(startY - endY);
-                        Euclid += Math.pow(startX - endX, 2) + Math.pow(startY - endY, 2);
+                        manHattan += Math.abs(startX - endX) + Math.abs(startY - endY);
+                        euclid += Math.pow(startX - endX, 2) + Math.pow(startY - endY, 2);
                         break;
                     }
                 }
@@ -168,6 +158,6 @@ public class Solution extends Jigsaw {
         }
 
         // Set weight of the cost
-        jNode.setEstimatedValue(7 * count + 6 * ManHattan + 3 * Euclid);
+        jNode.setEstimatedValue(7 * count + 6 * manHattan + 3 * euclid);
     }
 }

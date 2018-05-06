@@ -13,7 +13,7 @@
   </path>
 
   <target name="compile">
-    <javac destdir="${run.classpath}" srcdir="${run.srcpath}" classpathref="compile.path"/>
+    <javac destdir="${run.classpath}" srcdir="${run.srcpath}" classpathref="compile.path" includeantruntime="on"/>
   </target>
 
   <target name="junit" depends="compile">

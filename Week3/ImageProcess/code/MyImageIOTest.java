@@ -18,7 +18,7 @@ public class MyImageIOTest {
     }
 
     public void testOne(String which, String color) throws IOException {
-        String sourcePath = "/home/tao/桌面/ImageProcess/bmptest/" + which + ".bmp";
+        String sourcePath = "/home/administrator/Desktop/se-2018/Week3/ImageProcess/bmptest/" + which + ".bmp";
         MyImageIO myImage = new MyImageIO();
         Image image= myImage.myRead(sourcePath);
 
@@ -40,7 +40,7 @@ public class MyImageIOTest {
                 break;
         }
 
-        String goalPath = "/home/tao/桌面/ImageProcess/bmptest/goal/" + which + "_" + color + "_goal.bmp";
+        String goalPath = "/home/administrator/Desktop/se-2018/Week3/ImageProcess/bmptest/goal/" + which + "_" + color + "_goal.bmp";
         FileInputStream goalFile = new FileInputStream(goalPath);
         BufferedImage goalImage = ImageIO.read(goalFile);
 
@@ -49,9 +49,11 @@ public class MyImageIOTest {
         BufferedImage myBufferedImage = new BufferedImage(w, d, BufferedImage.TYPE_3BYTE_BGR);
         myBufferedImage.getGraphics().drawImage(myProcessedImage, 0, 0, w, d, null);   
         
-        for (int i = 0; i < goalImage.getWidth(null); i++)
-            for (int j = 0; j < goalImage.getHeight(null); j++)
+        for (int i = 0; i < goalImage.getWidth(null); i++) {            
+            for (int j = 0; j < goalImage.getHeight(null); j++) {
                 assertEquals(goalImage.getRGB(i, j), myBufferedImage.getRGB(i, j));
+            }
+        }
 
         assertEquals(myProcessedImage.getWidth(null), goalImage.getWidth(null));
         assertEquals(myProcessedImage.getHeight(null), goalImage.getHeight(null));

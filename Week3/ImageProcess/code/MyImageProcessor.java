@@ -10,29 +10,25 @@ public class MyImageProcessor implements IImageProcessor{
     public Image showChanelR(Image sourceImage){  
         ColorFilter redFilter = new ColorFilter(1);  
         Toolkit toolKit = Toolkit.getDefaultToolkit();  
-        Image img = toolKit.createImage(new FilteredImageSource(sourceImage.getSource(), redFilter));  
-        return img;  
+        return toolKit.createImage(new FilteredImageSource(sourceImage.getSource(), redFilter));  
     }  
       
     public Image showChanelG(Image sourceImage){  
         ColorFilter greenFilter = new ColorFilter(2);  
         Toolkit toolKit = Toolkit.getDefaultToolkit();  
-        Image img = toolKit.createImage(new FilteredImageSource(sourceImage.getSource(), greenFilter));  
-        return img;  
+        return toolKit.createImage(new FilteredImageSource(sourceImage.getSource(), greenFilter));  
     }  
       
     public Image showChanelB(Image sourceImage){  
         ColorFilter blueFilter = new ColorFilter(3);  
         Toolkit toolKit = Toolkit.getDefaultToolkit();  
-        Image img = toolKit.createImage(new FilteredImageSource(sourceImage.getSource(), blueFilter));  
-        return img;  
+        return toolKit.createImage(new FilteredImageSource(sourceImage.getSource(), blueFilter));  
     }  
       
     public Image showGray(Image sourceImage){  
         ColorFilter grayFilter = new ColorFilter(4);  
         Toolkit toolKit = Toolkit.getDefaultToolkit();  
-        Image img = toolKit.createImage(new FilteredImageSource(sourceImage.getSource(), grayFilter));  
-        return img;  
+        return toolKit.createImage(new FilteredImageSource(sourceImage.getSource(), grayFilter));  
     }  
   
 }  
