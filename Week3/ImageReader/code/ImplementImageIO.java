@@ -14,7 +14,7 @@ import javax.imageio.ImageIO;
   
 import imagereader.IImageIO;  
   
-public class MyImageIO implements IImageIO{  
+public class ImplementImageIO implements IImageIO{  
     private Image _img;  
       
     public int readNumFromBytes(byte[] bytes, int start, int end){
