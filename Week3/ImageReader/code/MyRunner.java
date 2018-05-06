@@ -4,9 +4,9 @@ public class MyRunner {
   
     public static void main(String args[]){  
           
-        MyImageIO myImageIO = new MyImageIO();  
+        ImplementImageIO myImageIO = new ImplementImageIO();  
           
-        MyImageProcessor myImageProcessor = new MyImageProcessor();  
+        ImplementImageProcessor myImageProcessor = new ImplementImageProcessor();  
           
         Runner.run(myImageIO, myImageProcessor);  
     }  

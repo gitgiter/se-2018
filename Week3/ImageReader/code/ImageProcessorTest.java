@@ -11,7 +11,7 @@ import imagereader.IImageProcessor;
 
 import javax.imageio.ImageIO;
 
-public class MyImageIOTest {
+public class ImageProcessorTest {
 
     @Before
     public void setUp() throws Exception {
@@ -19,10 +19,10 @@ public class MyImageIOTest {
 
     public void testOne(String which, String color) throws IOException {
         String sourcePath = "/home/administrator/Desktop/se-2018/Week3/ImageProcess/bmptest/" + which + ".bmp";
-        MyImageIO myImage = new MyImageIO();
+        ImplementImageIO myImage = new ImplementImageIO();
         Image image= myImage.myRead(sourcePath);
 
-        MyImageProcessor processor = new MyImageProcessor();         
+        ImplementImageProcessor processor = new ImplementImageProcessor();         
         Image myProcessedImage = null;
         switch (color)
         {

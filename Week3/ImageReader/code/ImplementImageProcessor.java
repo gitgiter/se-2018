@@ -5,7 +5,7 @@ import java.awt.Toolkit;
 import java.awt.image.FilteredImageSource;  
 import java.awt.image.RGBImageFilter;  
   
-public class MyImageProcessor implements IImageProcessor{  
+public class ImplementImageProcessor implements IImageProcessor{  
       
     public Image showChanelR(Image sourceImage){  
         ColorFilter redFilter = new ColorFilter(1);  
